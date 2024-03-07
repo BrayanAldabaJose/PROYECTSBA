@@ -321,7 +321,7 @@ return [
         ['header' => 'settings'],
         [
             'text' => 'Profile',
-            'url'  => 'profile',
+            'url'  => 'admin/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -329,23 +329,19 @@ return [
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
         ],
-        /*[
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],*/
+
         [
             'text' => 'Category',
             'url'  => 'admin/categories', // Cambia 'admin/category' a 'admin/categories'
             'icon' => 'fas fa-fw fa-user',
         ],
-        
+
         [
             'text' => 'Products',
             'url'  => 'admin/products', // Cambia esto a la ruta correcta
             'icon' => 'fas fa-fw fa-user',
-        ], 
-     
+        ],
+
         [
             'text' => 'Client',
             'url'  => '',

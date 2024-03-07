@@ -1,34 +1,40 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Profile') }}
-        </h2>
-    </x-slot>
+@extends('adminlte::page')
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+@section('title', 'Edit Profile')
+
+@section('content_header')
+    <h1>Edit Profile</h1>
+@stop
+
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <!-- Formulario de edición aquí -->
             <form action="{{ route('profile.update') }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                <div>
-                    <x-label for="name" :value="__('Name')" />
-                    <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$user->name" required autofocus />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required autofocus>
                 </div>
 
-                <div>
-                    <x-label for="email" :value="__('Email')" />
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="$user->email" required />
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                </div>
+
+                <!-- Enlace para ir a la página de cambio de contraseña -->
+                <div class="form-group">
+                    <a href="{{ route('profile.updatePasswordView') }}">Change Password</a>
                 </div>
 
                 <!-- Otros campos del perfil que desees editar -->
 
-                <div class="flex items-center justify-end mt-4">
-                    <x-button>
-                        {{ __('Update Profile') }}
-                    </x-button>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
                 </div>
             </form>
         </div>
     </div>
-</x-app-layout>
+@stop

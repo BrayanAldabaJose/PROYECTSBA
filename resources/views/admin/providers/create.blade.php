@@ -24,9 +24,10 @@
                     <input type="text" name="ruc_number" class="form-control" required>
                 </div>
                 <div class="form-group">
-    <label for="address">Dirección</label>
-    <input type="text" name="address" class="form-control">
-</div>
+                    <label for="address">Dirección</label>
+                    <input type="text" name="address" class="form-control">
+                </div>
+
 
                 <div class="form-group">
                     <label for="phone">Teléfono</label>

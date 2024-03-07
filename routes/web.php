@@ -1,17 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController; // Importa el controlador ProfileController
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+// Rutas públicas
+Route::get('/', function () {
+    return view('welcome');
 });
+
+// Rutas para usuarios autenticados
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    // ... Otras rutas ...
+
+    // Rutas para el panel de control (dashboard)
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     // Rutas para productos
     Route::resource('admin/products', ProductController::class);
@@ -23,9 +31,30 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('admin/providers', ProviderController::class);
 
     // Rutas para usuarios
-    Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
-    Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-    Route::delete('admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-    Route::put('admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::prefix('admin/users')->name('admin.users.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update');
+    });
+
+    // Rutas para el perfil de usuario
+ // Rutas para el perfil de usuario
+Route::prefix('admin/profile')->name('profile.')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    // Mostrar perfil
+    Route::get('/', [ProfileController::class, 'show'])->name('show');
+
+    // Editar perfil
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+
+    // Actualizar perfil
+    Route::put('/update', [ProfileController::class, 'update'])->name('update');
+
+    // Mostrar formulario para cambiar contraseña
+    Route::get('/update-password', [ProfileController::class, 'updatePasswordView'])->name('updatePasswordView');
+
+    // Actualizar contraseña
+    Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('updatePassword');
+});
 
 });
