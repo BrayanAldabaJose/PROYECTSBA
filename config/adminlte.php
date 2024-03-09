@@ -329,6 +329,11 @@ return [
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
         ],
+        [
+            'text' => 'Roles',
+            'url'  => 'admin/roles',
+            'icon' => 'fas fa-fw fa-user',
+        ],
 
         [
             'text' => 'Category',

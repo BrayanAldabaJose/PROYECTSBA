@@ -15,6 +15,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th>Roles</th>
                         <th>Acciones</th> <!-- Agregar columna para las acciones -->
                     </tr>
                 </thead>
@@ -24,6 +25,11 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>
+                                @foreach($user->roles->take(2) as $role)
+                                    {{ $role->name }}<br>
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
