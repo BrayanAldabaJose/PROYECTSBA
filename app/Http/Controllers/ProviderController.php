@@ -42,6 +42,10 @@ class ProviderController extends Controller
             'ruc_number' => 'required|string|max:11|unique:providers',
             'address' => 'nullable|string|max:255',
             'phone' => 'required|string|max:9|unique:providers',
+            'camera_type' => 'required|string|max:255', // Nuevo campo: Tipo de cámaras
+            'origin_country' => 'required|string|max:255', // Nuevo campo: País de Origen
+            'latin_american_countries' => 'required|string|max:255', // Nuevo campo: Países de Latinoamérica con oficinas
+            'main_link' => 'required|url|max:255', // Nuevo campo: Link principal
         ]);
 
         Provider::create($request->all());
@@ -85,6 +89,10 @@ class ProviderController extends Controller
             'ruc_number' => 'required|string|max:11|unique:providers,ruc_number,' . $provider->id,
             'address' => 'nullable|string|max:255',
             'phone' => 'required|string|max:9|unique:providers,phone,' . $provider->id,
+            'camera_type' => 'required|string|max:255', // Nuevo campo: Tipo de cámaras
+            'origin_country' => 'required|string|max:255', // Nuevo campo: País de Origen
+            'latin_american_countries' => 'required|string|max:255', // Nuevo campo: Países de Latinoamérica con oficinas
+            'main_link' => 'required|url|max:255', // Nuevo campo: Link principal
         ]);
 
         $provider->update($request->all());

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas públicas
@@ -39,7 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::put('/{user}', [UserController::class, 'update'])->name('update');
     });
 
-    
+
     // Rutas para el perfil de usuario
     Route::prefix('admin/profile')->name('profile.')->middleware(['auth:sanctum', 'verified'])->group(function () {
         // Mostrar perfil
@@ -67,6 +68,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::put('/{role}', [RoleController::class, 'update'])->name('update');
         Route::delete('/{role}', [RoleController::class, 'destroy'])->name('destroy');
         Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');
+        Route::get('/actualizar-roles', 'RoleController@actualizarRoles')->name('roles.actualizar');
+
     });
+
+    Route::prefix('admin')->middleware('auth')->group(function () {
+        Route::get('/activity', [ActivityController::class, 'index'])->name('admin.activity.index');
+        Route::get('/activity/{activity}', [ActivityController::class, 'show'])->name('admin.activity.show');
+
+    });
+
 });
 

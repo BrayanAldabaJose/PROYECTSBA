@@ -16,6 +16,7 @@
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Roles</th>
+                        <th>Foto de Perfil</th>
                         <th>Acciones</th> <!-- Agregar columna para las acciones -->
                     </tr>
                 </thead>
@@ -29,6 +30,9 @@
                                 @foreach($user->roles->take(2) as $role)
                                     {{ $role->name }}<br>
                                 @endforeach
+                            </td>
+                            <td>
+                                <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="Profile Photo" class="img-thumbnail mt-2 rounded-circle" style="max-width: 50px;">
                             </td>
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">Editar</a>

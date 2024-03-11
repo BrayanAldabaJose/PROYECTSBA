@@ -23,6 +23,12 @@
                         <th>Número de RUC</th>
                         <th>Dirección</th>
                         <th>Teléfono</th>
+                        <!-- Nuevos campos -->
+                        <th>Tipo de cámaras</th>
+                        <th>País de Origen</th>
+                        <th>Países de Latinoamérica con oficinas</th>
+                        <th>Link principal</th>
+                        <!-- Fin de nuevos campos -->
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -34,6 +40,12 @@
                             <td>{{ $provider->ruc_number }}</td>
                             <td>{{ $provider->address }}</td>
                             <td>{{ $provider->phone }}</td>
+                            <!-- Nuevos campos -->
+                            <td>{{ $provider->camera_type }}</td>
+                            <td>{{ $provider->origin_country }}</td>
+                            <td>{{ $provider->latin_american_countries }}</td>
+                            <td>{{ $provider->main_link }}</td>
+                            <!-- Fin de nuevos campos -->
                             <td>
                                 <a href="{{ route('providers.show', $provider->id) }}" class="btn btn-info">Ver</a>
                                 <a href="{{ route('providers.edit', $provider->id) }}" class="btn btn-primary">Editar</a>

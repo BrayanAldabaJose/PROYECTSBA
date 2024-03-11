@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User; // Importación del modelo User
 
 class ProfileController extends Controller
 {
+
 
     public function show()
     {
@@ -31,10 +33,16 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $user->update($validatedData);
+        if ($request->hasFile('profile_photo_path')) {
+            $profilePhotoPath = $request->file('profile_photo_path')->store('profile-photos', 'public');
+            $validatedData['profile_photo_path'] = $profilePhotoPath;
+        }
 
+        $user->update($validatedData);
+        dd($validatedData);
         return redirect()->route('profile.show')->with('success', 'Perfil actualizado exitosamente.');
     }
 

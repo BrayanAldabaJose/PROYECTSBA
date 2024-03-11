@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('ruc_number');
             $table->string('address')->nullable();
             $table->string('phone');
+            $table->string('camera_type'); // Nuevo campo: Tipo de cámaras
+            $table->string('origin_country'); // Nuevo campo: País de Origen
+            $table->string('latin_american_countries'); // Nuevo campo: Países de Latinoamérica con oficinas
+            $table->string('main_link'); // Nuevo campo: Link principal
             $table->timestamps();
         });
     }

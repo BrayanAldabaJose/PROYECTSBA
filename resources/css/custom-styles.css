@@ -1,0 +1,54 @@
+/* En tu archivo resources/css/custom-styles.css */
+
+/* Importaciones de Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Otras reglas de estilos personalizados */
+[x-cloak] {
+    display: none;
+}
+
+/* Estilo de fondo para la tabla */
+.table-bordered {
+    border: 2px solid #3498db; /* Borde azul */
+    background-color: #ecf0f1; /* Fondo gris claro */
+}
+
+/* Estilos para las celdas */
+.table-bordered td {
+    padding: 8px;
+}
+
+/* Estilos para las filas impares */
+.table-bordered tbody tr:nth-child(odd) {
+    background-color: #d5e7f2; /* Fondo azul claro para filas impares */
+}
+
+/* Estilos para el mensaje cuando no hay actividades disponibles */
+.text-center {
+    color: #999;
+}
+/* En tu archivo resources/css/custom-styles.css */
+
+/* Estilo de fondo para la tabla */
+.table-bordered {
+    border: 2px solid #3498db; /* Borde azul */
+    background-color: #ecf0f1; /* Fondo gris claro */
+}
+
+/* Estilos para las celdas */
+.table-bordered td {
+    padding: 8px;
+}
+
+/* Estilos para las filas impares */
+.table-bordered tbody tr:nth-child(odd) {
+    background-color: #d5e7f2; /* Fondo azul claro para filas impares */
+}
+
+/* Estilos para el mensaje cuando no hay actividades disponibles */
+.text-center {
+    color: #999;
+}

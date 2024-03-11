@@ -7,7 +7,7 @@
         <div class="card-header">
             <h3 class="card-title">Roles</h3>
             <div class="card-tools">
-                <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Crear Nuevo Rol</a>
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-success">Crear Nuevo Rol</a>
             </div>
         </div>
         <!-- /.card-header -->
@@ -18,6 +18,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
+                        <th>Permisos</th>
                         <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
@@ -29,6 +30,14 @@
                             <td>{{ $role->name }}</td>
                             <td>{{ $role->description }}</td>
                             <td>
+                                @foreach ($role->permissions as $permission)
+                                    {{ $permission->name }}
+                                    @if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td>
                                 @if ($role->image)
                                     <img src="{{ asset('images/roles/' . $role->image) }}" alt="{{ $role->name }}" style="max-width: 100px;">
                                 @else
@@ -37,11 +46,7 @@
                             </td>
                             <td>
                                 <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                                <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este rol?')">Eliminar</button>
-                                </form>
+                                <!-- Eliminar el formulario de eliminar -->
                             </td>
                         </tr>
                     @endforeach

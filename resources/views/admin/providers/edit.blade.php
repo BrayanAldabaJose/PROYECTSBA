@@ -32,6 +32,24 @@
                     <label for="phone">Teléfono</label>
                     <input type="text" name="phone" class="form-control" value="{{ $provider->phone }}" required>
                 </div>
+                <!-- Nuevos campos -->
+                <div class="form-group">
+                    <label for="camera_type">Tipo de cámaras</label>
+                    <input type="text" name="camera_type" class="form-control" value="{{ $provider->camera_type }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="origin_country">País de Origen</label>
+                    <input type="text" name="origin_country" class="form-control" value="{{ $provider->origin_country }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="latin_american_countries">Países de Latinoamérica con oficinas</label>
+                    <input type="text" name="latin_american_countries" class="form-control" value="{{ $provider->latin_american_countries }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="main_link">Link principal</label>
+                    <input type="url" name="main_link" class="form-control" value="{{ $provider->main_link }}" required>
+                </div>
+                <!-- Fin de nuevos campos -->
                 <button type="submit" class="btn btn-primary">Actualizar</button>
             </form>
         </div>

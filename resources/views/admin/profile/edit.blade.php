@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
             <!-- Formulario de edición aquí -->
-            <form action="{{ route('profile.update') }}" method="POST">
+            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -24,12 +24,20 @@
                     <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="profile_photo_path">Profile Photo</label>
+                    <input type="file" class="form-control-file" id="profile_photo_path" name="profile_photo_path">
+                    @if ($user->profile_photo_path)
+                        <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="Profile Photo" class="img-thumbnail mt-2" style="max-width: 200px;">
+                    @endif
+                </div>
+
                 <!-- Enlace para ir a la página de cambio de contraseña -->
                 <div class="form-group">
                     <a href="{{ route('profile.updatePasswordView') }}">Change Password</a>
                 </div>
 
-                <!-- Otros campos del perfil que desees editar -->
+
 
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Update Profile</button>
