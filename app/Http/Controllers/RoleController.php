@@ -59,46 +59,38 @@ class RoleController extends Controller
         return view('admin.roles.edit', compact('role'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, Role $role)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($user->id),
-            ],
-            'profile_photo_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             // Otros campos de validación según tu lógica
         ]);
 
         try {
-            // Actualizar usuario
-            $user->update($request->only('name', 'email'));
+            // Actualizar rol
+            $role->update([
+                'name' => $request->name,
+                'description' => $request->description,
+            ]);
 
-            // Actualizar foto de perfil si se proporciona
+            // Actualizar imagen si se proporciona
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/roles'), $imageName);
+                $role->image = $imageName;
+                $role->save();
+            }
+
+            // Loguear la actualización del rol y otros registros según tu lógica
             // ...
 
-            // Sincronizar roles y permisos
-            $rolesInput = $request->input('roles', []);
-            $permissionsInput = $request->input('permissions', []);
-
-            // Verificar si los roles y permisos existen antes de sincronizarlos
-            $existingRoles = Role::whereIn('name', $rolesInput)->get();
-            $existingPermissions = Permission::whereIn('name', $permissionsInput)->get();
-
-            $user->syncRoles($existingRoles);
-            $user->syncPermissions($existingPermissions);
-
-            // Loguear la actualización del nombre del usuario y otros registros según tu lógica
-            // ...
-
-            return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
+            return redirect()->route('admin.roles.index')->with('success', 'Rol actualizado exitosamente.');
         } catch (\Exception $e) {
             // Manejar la excepción (puedes loguearla, redirigir a una página de error, etc.)
-            return redirect()->back()->with('error', 'Ocurrió un error al sincronizar roles y permisos.');
+            return redirect()->back()->with('error', 'Ocurrió un error al actualizar el rol.');
         }
     }
 

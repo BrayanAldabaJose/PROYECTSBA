@@ -39,7 +39,7 @@
                             </td>
                             <td>
                                 @if ($role->image)
-                                    <img src="{{ asset('images/roles/' . $role->image) }}" alt="{{ $role->name }}" style="max-width: 100px;">
+                                    <img src="{{ asset('images/roles/' . $role->image) }}" alt="{{ $role->name }}" style="max-width: 100px; border-radius: 50%;">
                                 @else
                                     Sin imagen
                                 @endif

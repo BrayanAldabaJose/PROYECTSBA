@@ -8,6 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controller\ProductImageController;
+use App\Http\Controllers\ProductPriceController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReservationDetailController;
+use App\Http\Controllers\ShopliveController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas públicas
@@ -25,7 +30,31 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Rutas para productos
     Route::resource('admin/products', ProductController::class);
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+// Rutas para almacenar y eliminar imágenes del product
 
+
+// Rutas para almacenar y eliminar imágenes del producto
+Route::post('/product-images', [ProductImageController::class, 'store'])->name('product-images.store');
+Route::put('/product-images/{productImage}', [ProductImageController::class, 'update'])->name('product-images.update');
+Route::delete('/product-images/{productImage}', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
+
+Route::post('/reservations/create/{productId}', [ReservationController::class, 'create'])->name('reservations.create');
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+
+
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+// Ruta para mostrar los precios de los productos
+// Rutas para editar y eliminar precios de productos
+Route::post('product_prices', [ProductPriceController::class, 'store'])->name('product_prices.store');
+Route::get('product_prices/{productPrice}/edit', [ProductPriceController::class, 'edit'])->name('product_prices.edit');
+Route::put('product_prices/{productPrice}', [ProductPriceController::class, 'update'])->name('product_prices.update');
+Route::delete('product_prices/{productPrice}', [ProductPriceController::class, 'destroy'])->name('product_prices.destroy');
+Route::get('product_prices/{product}', [ProductPriceController::class, 'show'])->name('product_prices.show');
+    });
     // Rutas para categorías
     Route::resource('admin/categories', CategoryController::class);
 
@@ -77,6 +106,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/activity/{activity}', [ActivityController::class, 'show'])->name('admin.activity.show');
 
     });
+
+    Route::get('/shoplive', [ShopliveController::class, 'index']);
 
 });
 

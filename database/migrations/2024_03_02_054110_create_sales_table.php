@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
+            // Eliminamos la columna 'client_id' ya que mencionaste que no existe la tabla 'clients'
+            // Asumiendo que 'user_id' se refiere al usuario que realizó la venta, lo dejamos así
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->dateTime('sale_date');
             $table->decimal('tax');
             $table->decimal('total');
- 
+
             $table->enum('status',['VALID','CANCELED'])->default('VALID');
             $table->timestamps();
         });
@@ -36,4 +36,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('sales');
     }
-};
+}

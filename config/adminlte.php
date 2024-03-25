@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'SBACB',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => ' | SBACB ',
 
     /*
     |--------------------------------------------------------------------------
@@ -187,12 +187,12 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'bg-white',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -211,7 +211,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -232,7 +232,7 @@ return [
     |
     */
 
-    'right_sidebar' => false,
+    'right_sidebar' => true,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -327,108 +327,79 @@ return [
         ],
         [
             'text' => 'Usuarios',
-            'url'  => 'admin/users',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Roles',
-            'url'  => 'admin/roles',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-
-        [
-            'text' => 'Category',
-            'url'  => 'admin/categories', // Cambia 'admin/category' a 'admin/categories'
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-users', // Icono de usuarios
+            'submenu' => [
+                [
+                    'text' => 'Roles',
+                    'url'  => 'admin/roles',
+                    'icon' => 'fas fa-user-lock', // Icono de roles
+                ],
+                // Otros elementos del submenú
+            ],
         ],
 
         [
             'text' => 'Products',
-            'url'  => 'admin/products', // Cambia esto a la ruta correcta
-            'icon' => 'fas fa-fw fa-user',
-        ],
-
-[
-            'text' => 'Providers',
-            'url'  => 'admin/providers',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-
-        [
-            'text' => 'Reporte de actividad',
-            'url'  => 'admin/activity',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-
-        [
-            'text' => 'Client',
-            'url'  => '',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => 'admin/products',
+            'icon' => 'fas fa-fw fa-box', // Icono de productos
+            'submenu' => [
+                [
+                    'text' => 'Category',
+                    'url'  => 'admin/categories', // Ruta de categorías
+                    'icon' => 'fas fa-fw fa-tags', // Icono de categorías
+                ],
+                [
+                    'text' => 'Providers',
+                    'url'  => 'admin/providers', // Ruta de proveedores
+                    'icon' => 'fas fa-fw fa-users', // Icono de proveedores
+                ],
+                [
+                    'text' => 'Crear Producto',
+                    'url'  => 'admin/products/create', // Agregada la ruta para crear productos
+                    'icon' => 'fas fa-fw fa-plus-circle', // Icono para crear productos
+                ],
+                [
+                    'text' => 'Listado de Productos', // Opción para ver el listado de productos
+                    'url'  => 'admin/products',
+                    'icon' => 'fas fa-fw fa-list', // Icono para el listado de productos
+                ],
+                // Otros elementos del submenú de productos
+            ],
         ],
 
         [
             'text' => 'Ventas',
-            'url'  => '',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Compras',
-            'url'  => '',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon' => 'far fa-money-bill-alt', // Icono para ventas
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Ventas Completadas',
+                    'url' => 'admin/sales/completed', // Ruta para ver las ventas completadas
+                    'icon' => 'far fa-check-circle', // Icono para ventas completadas
                 ],
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text' => 'Reservas',
+            'icon' => 'far fa-calendar-alt', // Icono para reservas
+            'submenu' => [
+                [
+                    'text' => 'Solicitudes Aprobadas',
+                    'url' => 'admin/reservations/approved', // Ruta para ver las solicitudes aprobadas
+                    'icon' => 'far fa-check-circle', // Icono para solicitudes aprobadas
+                ],
+                [
+                    'text' => 'Solicitudes en Espera',
+                    'url' => 'admin/reservations/pending', // Ruta para ver las solicitudes en espera
+                    'icon' => 'far fa-clock', // Icono para solicitudes en espera
+                ],
+            ],
+
         ],
+
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'Reporte de Actividad',
+            'url'  => 'admin/activity',
+            'icon' => 'far fa-chart-bar', // Icono para reporte de actividad
         ],
     ],
 
